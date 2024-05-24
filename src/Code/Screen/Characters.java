@@ -1,7 +1,6 @@
 package Code.Screen;
 
 import Code.Actor.Circle;
-import Code.Actor.Square;
 import Code.test;
 
 import javax.swing.*;
