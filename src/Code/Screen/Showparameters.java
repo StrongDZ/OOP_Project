@@ -19,6 +19,7 @@ public class Showparameters extends JPanel {
 //        setBorder(border);
         setLayout(gb);
         setPreferredSize(new Dimension(800,200));
+        setOpaque(false);
 //        setSize(800,200);
         gbc = new GridBagConstraints();
         start();

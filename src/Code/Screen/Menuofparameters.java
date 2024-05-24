@@ -16,7 +16,7 @@ public class Menuofparameters extends JPanel {
         setLayout(gb);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
         setBorder(border);
-        setPreferredSize(new Dimension(600,200));
+        setPreferredSize(new Dimension(400,200));
 
         start();
 

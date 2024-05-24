@@ -1,7 +1,10 @@
 package Code.Screen;
 
+import Code.test;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class MainScreen extends JFrame{
     GridBagConstraints gbc = new GridBagConstraints();;
@@ -9,13 +12,24 @@ public class MainScreen extends JFrame{
     Showparameters showparameters = new Showparameters();
     Menuofparameters menuofparameters = new Menuofparameters();
     Characters characters = new Characters();
+    BackgroundPanel panel;
     public MainScreen(String title){
         setting(title);
-
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        addComponent(showparameters,0,0,1,2);
-        addComponent(menuofparameters,0,2,1,1);
-        addComponent(characters,1,0,1,1);
+        panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg").getImage());
+//        JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(1920, 1080));
+        panel.setLayout(gb);
+        gbc.insets = new Insets(10,10,10,30);
+        addComponent(panel, showparameters,0,0,1,2);
+        gbc.insets = new Insets(10,30,10,10);
+        addComponent(panel, menuofparameters,0,2,1,1);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(10,10,10,0);
+        addComponent(panel, characters,1,0,1,1);
+        panel.revalidate();
+        panel.repaint();
+        add(panel);
+//        new test(panel);
 //        addComponent(showparameters(),0,0,10,5);
 
     }
@@ -26,20 +40,19 @@ public class MainScreen extends JFrame{
         setLocation(0,0);
         setPreferredSize(new Dimension(1920, 1080));
 //        setSize(900,700);
-        setLayout(gb);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public void addComponent(JPanel zui, Component c, int row, int col, int nrow, int ncol)
+    {
+        gbc.gridx=col;
+        gbc.gridy=row;
 
-        // Tạo một JLabel để chứa ảnh
-        ImageIcon imageIcon = new ImageIcon(Objects.class.getResource("Background.jpg"));
-        JLabel backgroundLabel = new JLabel(imageIcon);
+        gbc.gridwidth=ncol;
+        gbc.gridheight=nrow;
+//        gbc.insets = new Insets(10, 10, 10, 10);
+        gb.setConstraints(c,gbc);
 
-        backgroundLabel.setBounds(0, 0, this.getWidth(), this.getHeight());
-
-        // Thêm JLabel vào JFrame
-        addComponent(backgroundLabel,0,0,1,1);
-
-        // Đảm bảo rằng JLabel sẽ được vẽ sau tất cả các thành phần khác
-//        setContentPane(backgroundLabel);
+        zui.add(c);
     }
     public static void main(String[] args){
         MainScreen screen = new MainScreen("Forces");
@@ -48,16 +61,20 @@ public class MainScreen extends JFrame{
         screen.pack();
         screen.setVisible(true);
     }
-    public void addComponent(Component c, int row, int col, int nrow, int ncol)
-    {
-        gbc.gridx=col;
-        gbc.gridy=row;
+}
+class BackgroundPanel extends JPanel {
+    private Image backgroundImage;
 
-        gbc.gridwidth=ncol;
-        gbc.gridheight=nrow;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gb.setConstraints(c,gbc);
+    public BackgroundPanel(Image backgroundImage) {
+        this.backgroundImage = backgroundImage;
+    }
 
-        add(c);
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            // Vẽ ảnh nền
+            g.drawImage(backgroundImage, 0, 0, 1920, 1080, this);
+        }
     }
 }

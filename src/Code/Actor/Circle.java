@@ -2,10 +2,11 @@ package Code.Actor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
-public class Circle extends Objects{
+public class Circle extends Objectss{
     public Circle(int newWidth, int newHeight){
-        ImageIcon img = new ImageIcon(Objects.class.getResource("Duyen.jpg"));
+        ImageIcon img = new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Actor\\Duyen.jpg");
         Image scaledImg = img.getImage();
 
         // Resize the image if needed

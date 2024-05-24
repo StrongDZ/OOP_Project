@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
-public class Objects extends JButton {
+public class Objectss extends JButton {
     protected float friction, speed, acceleration, mass;
     public Image getCircularImage(Image img) {
         BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
