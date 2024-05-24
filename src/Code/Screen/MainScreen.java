@@ -12,6 +12,7 @@ public class MainScreen extends JFrame{
     Showparameters showparameters = new Showparameters();
     Menuofparameters menuofparameters = new Menuofparameters();
     Characters characters = new Characters();
+    AppliedForce appliedForce = new AppliedForce();
     BackgroundPanel panel;
     public MainScreen(String title){
         setting(title);
@@ -26,6 +27,7 @@ public class MainScreen extends JFrame{
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(10,10,10,0);
         addComponent(panel, characters,1,0,1,1);
+        addComponent(panel, appliedForce, 1, 1,1,1);
         panel.revalidate();
         panel.repaint();
         add(panel);
