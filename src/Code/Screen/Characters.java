@@ -11,12 +11,12 @@ import java.awt.event.ActionListener;
 import javax.swing.border.Border;
 
 public class Characters extends JPanel {
-    Square hung = new Square(150,150);
-    Circle duyen = new Circle(150,150);
+    Square hung = new Square(180,180);
+    Circle duyen = new Circle(180,180);
     public Characters(){
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2); // Viền đen có độ rộng là 2 pixels
-        setPreferredSize(new Dimension(500,200));
+        setPreferredSize(new Dimension(500,300));
         setBorder(border);
         add(Box.createGlue());
         add(hung);

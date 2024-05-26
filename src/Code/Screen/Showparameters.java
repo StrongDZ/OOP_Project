@@ -46,6 +46,7 @@ public class Showparameters extends JPanel {
     }
     public JLabel setLabel(String s){
         JLabel label = new JLabel(s);
+        label.setFont(new Font("Arial", Font.BOLD, 16));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
         label.setPreferredSize(new Dimension(200,50));

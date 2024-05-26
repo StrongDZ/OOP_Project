@@ -1,6 +1,9 @@
 package Code.Screen;
 
+import Code.Actor.Square;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -11,8 +14,10 @@ public class AppliedForce extends JPanel {
     private JTextField textField;
 
     public AppliedForce() {
-        setPreferredSize(new Dimension(500, 200));
+        setPreferredSize(new Dimension(450, 300));
         setLayout(new GridBagLayout());
+        Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+        setBorder(border);
         GridBagConstraints gbc = new GridBagConstraints();
 
         // Tạo và thiết lập JLabel
@@ -27,7 +32,7 @@ public class AppliedForce extends JPanel {
 
         // Tạo và thiết lập JSlider
         slider = new JSlider(JSlider.HORIZONTAL, -500, 500, 0);
-        slider.setPreferredSize(new Dimension(250,50));
+        slider.setPreferredSize(new Dimension(300,50));
         slider.setMajorTickSpacing(100);
         slider.setMinorTickSpacing(50);
         slider.setPaintTicks(true);
@@ -40,7 +45,8 @@ public class AppliedForce extends JPanel {
         add(slider, gbc);
 
         // Tạo và thiết lập JTextField
-        textField = new JTextField(5);
+        textField = new JTextField(7);
+        textField.setText(0+"");
         textField.setPreferredSize(new Dimension(30, 30));
         textField.setEditable(true);
         textField.setHorizontalAlignment(JTextField.CENTER);
@@ -51,6 +57,14 @@ public class AppliedForce extends JPanel {
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(0, 10, 50, 10);
         add(textField, gbc);
+
+        gbc.gridx = 5;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.insets = new Insets(0, 0, 50, 0);
+        add(new JLabel("(N)"), gbc);
 
         // Đồng bộ giá trị của JTextField với giá trị của JSlider
         slider.addChangeListener(new ChangeListener() {

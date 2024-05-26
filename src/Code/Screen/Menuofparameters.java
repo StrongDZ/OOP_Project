@@ -24,11 +24,10 @@ public class Menuofparameters extends JPanel {
         name.setPreferredSize(new Dimension(150, 30));
         name.setHorizontalAlignment(SwingConstants.CENTER);
         name.setFont(new Font("Arial", Font.PLAIN, 20));
-//        gbc.insets = new Insets(10, 10, 10, 10);
+
         gbc.fill = GridBagConstraints.HORIZONTAL;
         addComponent(name, 0, 0, 1, 3);
 
-        // Set up GridBagConstraints for the toggle buttons
         gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.WEST;
 

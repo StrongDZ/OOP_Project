@@ -2,7 +2,6 @@ package Code.Actor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
 public class Square extends Objectss{
     public Square(int newWidth, int newHeight){
