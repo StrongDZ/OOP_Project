@@ -39,7 +39,7 @@ class StaticFric extends JPanel {
         add(label, gbc);
 
         // Tạo và thiết lập JSlider
-        slider = new JSlider(JSlider.HORIZONTAL, -10, 10, 0);
+        slider = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
         slider.setPreferredSize(new Dimension(300, 50));
         slider.setMajorTickSpacing(2);
         slider.setMinorTickSpacing(1);
@@ -78,11 +78,11 @@ class StaticFric extends JPanel {
         textField.addActionListener(e -> {
             try {
                 int value = Integer.parseInt(textField.getText());
-                if (value >= -10 && value <= 10) {
+                if (value >= 0 && value <= 10) {
                     slider.setValue(value);
                 } else {
                     // Nếu giá trị nhập vào không hợp lệ, hiển thị thông báo và đặt lại giá trị của JTextField
-                    JOptionPane.showMessageDialog(null, "Invalid value. Please enter a value between -10 and 10.");
+                    JOptionPane.showMessageDialog(null, "Invalid value. Please enter a value between 0 and 10.");
                     textField.setText(String.valueOf(slider.getValue()));
                 }
             } catch (NumberFormatException ex) {
@@ -116,7 +116,7 @@ class KineticFric extends JPanel {
         add(label, gbc);
 
         // Tạo và thiết lập JSlider
-        slider = new JSlider(JSlider.HORIZONTAL, -10, 10, 0);
+        slider = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
         slider.setPreferredSize(new Dimension(300, 50));
         slider.setMajorTickSpacing(2);
         slider.setMinorTickSpacing(1);
@@ -155,11 +155,11 @@ class KineticFric extends JPanel {
         textField.addActionListener(e -> {
             try {
                 int value = Integer.parseInt(textField.getText());
-                if (value >= -10 && value <= 10) {
+                if (value >= 0 && value <= 10) {
                     slider.setValue(value);
                 } else {
                     // Nếu giá trị nhập vào không hợp lệ, hiển thị thông báo và đặt lại giá trị của JTextField
-                    JOptionPane.showMessageDialog(null, "Invalid value. Please enter a value between -10 and 10.");
+                    JOptionPane.showMessageDialog(null, "Invalid value. Please enter a value between 0 and 10.");
                     textField.setText(String.valueOf(slider.getValue()));
                 }
             } catch (NumberFormatException ex) {

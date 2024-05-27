@@ -5,14 +5,17 @@ import Code.test;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Menuofparameters extends JPanel {
     JToggleButton bforce, bposition, bvelocity, bacceleration, bmass, bsum;
     GridBagConstraints gbc = new GridBagConstraints();
     GridBagLayout gb = new GridBagLayout();
     JLabel name = new JLabel("Menu of parameters");
-
-    public Menuofparameters() {
+    MainScreen screen;
+    public Menuofparameters(MainScreen screen) {
+        this.screen = screen;
         setLayout(gb);
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
         setBorder(border);
@@ -26,8 +29,10 @@ public class Menuofparameters extends JPanel {
         name.setFont(new Font("Arial", Font.PLAIN, 20));
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(0,0,20,0);
         addComponent(name, 0, 0, 1, 3);
 
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.BOTH;
         gbc.anchor = GridBagConstraints.WEST;
 
@@ -47,6 +52,37 @@ public class Menuofparameters extends JPanel {
         bacceleration = setToggle("Acceleration");
         bmass = setToggle("Mass");
         bsum = setToggle("Sum of force");
+
+        bposition.addActionListener(new ActionListener() {
+//            JFrame screen1 = screen;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!bposition.isSelected()){
+                    screen.showparameters.statePosition(false);
+                }
+                else screen.showparameters.statePosition(true);
+            }
+        });
+
+        bvelocity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!bvelocity.isSelected()){
+                    screen.showparameters.stateVelocity(false);
+                }
+                else screen.showparameters.stateVelocity(true);
+            }
+        });
+
+        bacceleration.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!bacceleration.isSelected()){
+                    screen.showparameters.stateAcceleration(false);
+                }
+                else screen.showparameters.stateAcceleration(true);
+            }
+        });
     }
 
     public JToggleButton setToggle(String s) {
@@ -61,12 +97,8 @@ public class Menuofparameters extends JPanel {
         gbc.gridy = row;
         gbc.gridwidth = ncol;
         gbc.gridheight = nrow;
-        gbc.insets = new Insets(10, 10, 10, 10); // Set insets for spacing
+
         gb.setConstraints(c, gbc);
         add(c);
-    }
-
-    public static void main(String[] args) {
-        new test(new Menuofparameters());
     }
 }

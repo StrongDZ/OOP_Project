@@ -43,6 +43,9 @@ public class Showparameters extends JPanel {
         lposition=setLabel("Position");
         lacceleration=setLabel("Acceleration");
         lvelocity=setLabel("Velocity");
+        this.stateAcceleration(false);
+        this.stateVelocity(false);
+        this.statePosition(false);
     }
     public JLabel setLabel(String s){
         JLabel label = new JLabel(s);
@@ -71,6 +74,21 @@ public class Showparameters extends JPanel {
         lacceleration.setText("<html><div style='text-align: center;'>Acceleration<br>" + acceleration +" (m/s^2)</div></html>");
         lvelocity.setText("<html><div style='text-align: center;'>Velocity<br>" + velocity +" (m/s)</div></html>");
         lposition.setText("<html><div style='text-align: center;'>Position<br>" + position +" (m)</div></html>");
+    }
+
+    public void statePosition(boolean zui){
+        lposition.setVisible(zui);
+        langular_position.setVisible(zui);
+    }
+
+    public void stateVelocity(boolean zui){
+        lvelocity.setVisible(zui);
+        langular_velocity.setVisible(zui);
+    }
+
+    public void stateAcceleration(boolean zui){
+        lacceleration.setVisible(zui);
+        langualr_acceleration.setVisible(zui);
     }
     public static void main(String[] args){
         new test((JPanel)new Showparameters());

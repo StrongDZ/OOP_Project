@@ -11,41 +11,44 @@ public class MainScreen extends JFrame{
     GridBagConstraints gbc = new GridBagConstraints();;
     GridBagLayout gb = new GridBagLayout();
     Showparameters showparameters = new Showparameters();
-    Menuofparameters menuofparameters = new Menuofparameters();
+    Menuofparameters menuofparameters = new Menuofparameters(this);
     Characters characters = new Characters();
     AppliedForce appliedForce = new AppliedForce();
     FrictionCoeficient frictionCoeficient = new FrictionCoeficient();
     BackgroundPanel panel;
+
     public MainScreen(String title){
         setting(title);
         panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg").getImage());
         panel.setPreferredSize(new Dimension(1920, 1080));
         panel.setLayout(gb);
 
+        //Hàng đầu
         gbc.insets = new Insets(10,10,30,30);
         addComponent(panel, showparameters,0,0,1,2);
 
         gbc.insets = new Insets(10,30,30,10);
         addComponent(panel, menuofparameters,0,2,1,1);
 
+        //Hàng cuối
         gbc.anchor = GridBagConstraints.SOUTH;
-        gbc.insets = new Insets(75,20,30,25);
 
+        gbc.insets = new Insets(70,20,20,25);
         addComponent(panel, appliedForce, 2, 1,1,1);
-        gbc.insets = new Insets(75,20,30,26);
+        gbc.insets = new Insets(70,20,20,26);
         addComponent(panel, frictionCoeficient, 2,2,1,1);
-        gbc.insets = new Insets(75,25,30,20);
+        gbc.insets = new Insets(70,25,20,20);
         addComponent(panel, characters,2,0,1,1);
 
+        //Hàng giữa
         gbc.insets = new Insets(0,0,0,0);
-//        gbc.anchor = GridBagConstraints.NONE;
-        gbc.fill = GridBagConstraints.BOTH;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         JPanel panel1 = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg").getImage());
 //        panel1.setPreferredSize(new Dimension(1000, 300));
         addComponent(panel, panel1, 2,0,1,3);
 
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.insets = new Insets(0,0,0,0);
+        gbc.anchor = GridBagConstraints.SOUTH;
+        gbc.insets = new Insets(10,0,0,0);
         Square square = new Square(180,180);
         addComponent(panel, square, 1,1,1,1);
 
@@ -79,6 +82,7 @@ public class MainScreen extends JFrame{
         screen.revalidate();
         screen.repaint();
         screen.pack();
+        screen.setExtendedState(JFrame.MAXIMIZED_BOTH);
         screen.setVisible(true);
     }
 }
