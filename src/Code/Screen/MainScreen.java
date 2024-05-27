@@ -19,7 +19,7 @@ public class MainScreen extends JFrame{
 
     public MainScreen(String title){
         setting(title);
-        panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg").getImage());
+        panel = new BackgroundPanel(new ImageIcon("src/Code/Screen/Background1.jpg").getImage());
         panel.setPreferredSize(new Dimension(1920, 1080));
         panel.setLayout(gb);
 
@@ -43,7 +43,7 @@ public class MainScreen extends JFrame{
         //Hàng giữa
         gbc.insets = new Insets(0,0,0,0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        JPanel panel1 = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg").getImage());
+        JPanel panel1 = new BackgroundPanel(new ImageIcon("/Users/macbookpro/Documents/OOP_Project-2/src/Code/Screen/Background.jpg").getImage());
 //        panel1.setPreferredSize(new Dimension(1000, 300));
         addComponent(panel, panel1, 2,0,1,3);
 
