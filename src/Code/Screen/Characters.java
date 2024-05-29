@@ -2,7 +2,6 @@ package Code.Screen;
 
 import Code.Actor.Circle;
 import Code.Actor.Square;
-import Code.test;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,26 +10,44 @@ import java.awt.event.ActionListener;
 import javax.swing.border.Border;
 
 public class Characters extends JPanel {
-    Square hung = new Square(180,180);
-    Circle duyen = new Circle(180,180);
-    public Characters(){
+    Square square = new Square(180);
+    Circle circle = new Circle(180);
+    MainScreen screen;
+
+    public Characters(MainScreen screen) {
+        this.screen = screen;
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        Border border = BorderFactory.createLineBorder(Color.BLACK, 2); // Viền đen có độ rộng là 2 pixels
-        setPreferredSize(new Dimension(500,300));
+        Border border = BorderFactory.createLineBorder(Color.BLACK, 2); // Black border with 2 pixels width
+        setPreferredSize(new Dimension(500, 260));
         setBorder(border);
         add(Box.createGlue());
-        add(hung);
-        add(Box.createRigidArea(new Dimension(50,50)));
-        add(duyen);
+        add(square);
+        add(Box.createRigidArea(new Dimension(50, 50)));
+        add(circle);
         add(Box.createGlue());
-        hung.addActionListener(new ActionListener() {
+
+        square.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,"asdfasfasdf");
+                ValueInput values = new ValueInput("length");
+                if (values != null) {
+                    screen.mainCharacter.add(new Square(values.length), values.length, values.mass);
+                }
+            }
+        });
+
+        circle.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ValueInput values = new ValueInput("radius");
+                if (values != null) {
+                    screen.mainCharacter.add(new Circle(values.length), values.length, values.mass);
+                }
             }
         });
     }
-    public static void main(String[] args){
-        new test(new Characters());
-    }
 }
+
+
+
+

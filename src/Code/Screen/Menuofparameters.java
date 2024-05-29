@@ -54,7 +54,6 @@ public class Menuofparameters extends JPanel {
         bsum = setToggle("Sum of force");
 
         bposition.addActionListener(new ActionListener() {
-//            JFrame screen1 = screen;
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!bposition.isSelected()){

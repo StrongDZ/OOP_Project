@@ -1,5 +1,6 @@
 package Code.Screen;
 
+import Code.Actor.Objectss;
 import Code.Actor.Square;
 
 import javax.swing.*;
@@ -12,9 +13,12 @@ public class AppliedForce extends JPanel {
     private JLabel label;
     private JSlider slider;
     private JTextField textField;
+    MainScreen screen;
+    boolean change=false;
 
-    public AppliedForce() {
-        setPreferredSize(new Dimension(450, 300));
+    public AppliedForce(MainScreen screen) {
+        this.screen= screen;
+        setPreferredSize(new Dimension(450, 260));
         setLayout(new GridBagLayout());
         Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
         setBorder(border);
@@ -70,7 +74,10 @@ public class AppliedForce extends JPanel {
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                textField.setText(String.valueOf(slider.getValue()));
+                if (!slider.getValueIsAdjusting()){
+                    textField.setText(String.valueOf(slider.getValue()));
+                    change=true;
+                }
             }
         });
 
@@ -80,27 +87,23 @@ public class AppliedForce extends JPanel {
                 int value = Integer.parseInt(textField.getText());
                 if (value >= -500 && value <= 500) {
                     slider.setValue(value);
+                    change = true;
                 } else {
                     // Nếu giá trị nhập vào không hợp lệ, hiển thị thông báo và đặt lại giá trị của JTextField
-                    JOptionPane.showMessageDialog(null, "Invalid value. Please enter a value between -500 and 500.");
+                    new ExceptionCase("Invalid value. Please enter a value between -500 and 500.");
                     textField.setText(String.valueOf(slider.getValue()));
                 }
             } catch (NumberFormatException ex) {
                 // Nếu người dùng nhập vào không phải số, hiển thị thông báo và đặt lại giá trị của JTextField
-                JOptionPane.showMessageDialog(null, "Invalid input. Please enter a valid number.");
+                new ExceptionCase("Invalid input. Please enter a valid number.");
                 textField.setText(String.valueOf(slider.getValue()));
             }
         });
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Applied Force");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        AppliedForce appliedForce = new AppliedForce();
-        frame.getContentPane().add(appliedForce);
-
-        frame.pack();
-        frame.setVisible(true);
+    public void SyncAppliedForce(){
+        if(!change)return;
+        change=false;
+        Objectss mainCharacter = screen.mainCharacter.mainCharacter;
+        mainCharacter.setAppliedForce(Integer.parseInt(textField.getText()));
     }
 }

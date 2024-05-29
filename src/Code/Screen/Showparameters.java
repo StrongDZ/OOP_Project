@@ -3,6 +3,7 @@ package Code.Screen;
 //import javafx.*;
 
 
+import Code.Actor.Objectss;
 import Code.test;
 
 import javax.swing.*;
@@ -14,9 +15,9 @@ public class Showparameters extends JPanel {
     JLabel langular_velocity, lvelocity, langular_position, lacceleration, lposition, langualr_acceleration;
     GridBagConstraints gbc = new GridBagConstraints();
     GridBagLayout gb = new GridBagLayout();
+
     public Showparameters(){
-//        Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
-//        setBorder(border);
+
         setLayout(gb);
         setPreferredSize(new Dimension(800,200));
         setOpaque(false);
@@ -33,7 +34,6 @@ public class Showparameters extends JPanel {
         addComponent(langular_position,2,0,1,1);
         addComponent(langular_velocity,2,1,1,1);
         addComponent(langualr_acceleration,2,2,1,1);
-        Update();
 //        new test(this);
     }
     public void start(){
@@ -67,13 +67,13 @@ public class Showparameters extends JPanel {
         add(c);
     }
 
-    public void Update(){
-        langular_velocity.setText("<html><div style='text-align: center;'>Angular velocity <br>" + angular_velocity +" (rad/s)</div></html>");
-        langualr_acceleration.setText("<html><div style='text-align: center;'>Angular acceleration<br>" + angualr_acceleration +" (rad/s^2)</div></html>");
-        langular_position.setText("<html><div style='text-align: center;'>Angular position<br>" + angular_position +" (*)</div></html>");
-        lacceleration.setText("<html><div style='text-align: center;'>Acceleration<br>" + acceleration +" (m/s^2)</div></html>");
-        lvelocity.setText("<html><div style='text-align: center;'>Velocity<br>" + velocity +" (m/s)</div></html>");
-        lposition.setText("<html><div style='text-align: center;'>Position<br>" + position +" (m)</div></html>");
+    public void Update(Objectss mainChar){
+        langular_velocity.setText("<html><div style='text-align: center;'>Angular velocity <br>" +  String.format("%.2f",mainChar.getOmega()) +" (rad/s)</div></html>");
+        langualr_acceleration.setText("<html><div style='text-align: center;'>Angular acceleration<br>" +  String.format("%.2f",mainChar.getGamma()) +" (rad/s^2)</div></html>");
+        langular_position.setText("<html><div style='text-align: center;'>Angular position<br>" +  String.format("%.2f",mainChar.getTheta()) +" (*)</div></html>");
+        lacceleration.setText("<html><div style='text-align: center;'>Acceleration<br>" +  String.format("%.2f",mainChar.getAcceleration()) +" (m/s^2)</div></html>");
+        lvelocity.setText("<html><div style='text-align: center;'>Velocity<br>" +  String.format("%.2f",mainChar.getSpeed()) +" (m/s)</div></html>");
+        lposition.setText("<html><div style='text-align: center;'>Position<br>" +  String.format("%.2f",mainChar.getPosition()) +" (m)</div></html>");
     }
 
     public void statePosition(boolean zui){
@@ -91,7 +91,7 @@ public class Showparameters extends JPanel {
         langualr_acceleration.setVisible(zui);
     }
     public static void main(String[] args){
-        new test((JPanel)new Showparameters());
+//        new test((JPanel)new Showparameters());
     }
 
 }

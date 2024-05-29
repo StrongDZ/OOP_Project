@@ -2,15 +2,14 @@ package Code.Actor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
-public class Circle extends Objectss implements rotatingObject{
-    public Circle(int newWidth, int newHeight){
-        ImageIcon img = new ImageIcon("/Users/macbookpro/Documents/OOP_Project-2/src/Code/Actor/Duyen.jpg");
+public class Circle extends Objectss{
+    public Circle(int Length){
+        ImageIcon img = new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Actor\\Duyen.jpg");
         Image scaledImg = img.getImage();
 
         // Resize the image if needed
-        scaledImg = scaledImg.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        scaledImg = scaledImg.getScaledInstance(Length, Length, Image.SCALE_SMOOTH);
 
         ImageIcon icon = new ImageIcon(scaledImg);
         setIcon(new ImageIcon(getCircularImage(icon.getImage())));
@@ -18,34 +17,9 @@ public class Circle extends Objectss implements rotatingObject{
         setFocusPainted(false);
         setContentAreaFilled(false);
     }
-    private float gamma=0, omega=0,theta=0;
-    public Circle(float radius, float mass){
-        super(radius, mass);
-    }
 
-    public float getGamma(){
-        return gamma;
-    }
-    
-    public void setGamma(float gamma){
-        this.gamma=gamma;
-    }
 
-    public float getOmega(){
-        return omega;
-    }
-    
-    public void setOmega(float omega){
-        this.omega=omega;
-    }
 
-    public float getTheta(){
-        return theta;
-    }
-    
-    public void setTheta(float theta){
-        this.theta=theta;
-    }
 
     public void resetObjectss(){
         super.resetObjectss();
@@ -54,30 +28,40 @@ public class Circle extends Objectss implements rotatingObject{
         this.setTheta(0);
     }
 
-    public float calculateFriction(float AppliedForce, float staticCoeffient, float kinetiCoefficient){
+    public void calculateFriction(float AppliedForce, float staticCoeffient, float kinetiCoefficient){
+        float out;
+//        System.out.println("hah" + this.getAppliedForce() +" "+this.getFriction()+ " "+this.getSpeed());
         if(Math.abs(AppliedForce)<=3*this.normalForce()*staticCoeffient&&this.getSpeed()==0){
-            return -AppliedForce/3;
+//            System.out.println("hahahaha");
+            out = -AppliedForce/3;
         }
         else if(Math.abs(AppliedForce)>3*this.normalForce()*staticCoeffient&&this.getSpeed()==0){
+
             if(AppliedForce>0){
-                return -this.normalForce()*kinetiCoefficient;
+                out = -this.normalForce()*kinetiCoefficient;
             }
             else{
-                return this.normalForce()*kinetiCoefficient;
+                out = this.normalForce()*kinetiCoefficient;
             }
         }
         else if(this.getSpeed()<0){
-            return this.normalForce()*kinetiCoefficient;
+            out = this.normalForce()*kinetiCoefficient;
         }
         else{
-            return -this.normalForce()*kinetiCoefficient;
+            out = -this.normalForce()*kinetiCoefficient;
         }
+        if(AppliedForce == 0 && this.getSpeed()==0){
+            out=0;
+//            System.out.println("hahahahahahahahahaha");
+        }
+        setFriction(out);
     }
+
     public void updateObject(float acceleration, float newGamma){
         updateObject(acceleration);
         this.setGamma(newGamma);
         if(this.getOmega()*(this.getOmega()+time*newGamma)<0){
-            this.setGamma(0);
+            this.setOmega(0);
         }
         else{
             this.setOmega(this.getOmega()+time*newGamma);
@@ -89,13 +73,8 @@ public class Circle extends Objectss implements rotatingObject{
             this.setTheta(this.getTheta()+time*this.getOmega());
         }
     }
-    public float calculateGamma(float friction, float mass, float radius){
-        return -2*friction/(mass*radius);
-    }
 
-    @Override
-    public float calculateGamme(float friction, float mass, float radius) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calculateGamme'");
+    public float calculateGamma(float friction, int mass, int radius){
+        return -2*friction/(mass*radius*radius)*10000;
     }
 }
