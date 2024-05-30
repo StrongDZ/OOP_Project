@@ -4,10 +4,8 @@ package Code.Screen;
 
 
 import Code.Actor.Objectss;
-import Code.test;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class Showparameters extends JPanel {

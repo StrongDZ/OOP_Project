@@ -1,7 +1,7 @@
 package Code.Screen;
 
 import Code.Actor.Objectss;
-import Code.Actor.Square;
+import Code.LinhTinh.ExceptionCase;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -74,10 +74,10 @@ public class AppliedForce extends JPanel {
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                if (!slider.getValueIsAdjusting()){
+//                if (!slider.getValueIsAdjusting()){
                     textField.setText(String.valueOf(slider.getValue()));
                     change=true;
-                }
+//                }
             }
         });
 
@@ -100,10 +100,17 @@ public class AppliedForce extends JPanel {
             }
         });
     }
-    public void SyncAppliedForce(){
-        if(!change)return;
-        change=false;
+    public void SyncAppliedForce() {
+        if (!change) return;
+        change = false;
         Objectss mainCharacter = screen.mainCharacter.mainCharacter;
-        mainCharacter.setAppliedForce(Integer.parseInt(textField.getText()));
+        String text = textField.getText();
+        if (text.matches("-?\\d+")) {
+            int appliedForce = Integer.parseInt(text);
+            mainCharacter.setAppliedForce(appliedForce);
+        }
+    }
+    public void reset(){
+        slider.setValue(0);
     }
 }

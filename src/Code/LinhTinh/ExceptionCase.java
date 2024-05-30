@@ -1,4 +1,4 @@
-package Code.Screen;
+package Code.LinhTinh;
 
 import javax.swing.*;
 

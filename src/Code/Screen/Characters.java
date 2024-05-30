@@ -2,6 +2,7 @@ package Code.Screen;
 
 import Code.Actor.Circle;
 import Code.Actor.Square;
+import Code.LinhTinh.ValueInput;
 
 import javax.swing.*;
 import java.awt.*;

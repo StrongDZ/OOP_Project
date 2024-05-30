@@ -1,5 +1,6 @@
 package Code.Screen;
 import Code.Actor.Objectss;
+import Code.LinhTinh.ExceptionCase;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -33,6 +34,11 @@ public class FrictionCoeficient extends JPanel {
             mainCharacter.setStaticfric((float)(staticfric * 0.1));
             mainCharacter.setKineticfric((float) (kineticfric * 0.1));
         }
+    }
+    public void reset(){
+        kineticFricPanel.slider.setValue(0);
+        staticFricPanel.slider.setValue(1);
+
     }
 }
 
@@ -91,7 +97,7 @@ class StaticFric extends JPanel {
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(0, 0, 30, 0);
-        add(new JLabel("^(-1)"), gbc);
+        add(new JLabel("*0.1"), gbc);
 
         slider.addChangeListener(new ChangeListener() {
             @Override
@@ -191,7 +197,7 @@ class KineticFric extends JPanel {
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(0, 0, 30, 0);
-        add(new JLabel("^(-1)"), gbc);
+        add(new JLabel("*0.1"), gbc);
 
         slider.addChangeListener(new ChangeListener() {
             @Override

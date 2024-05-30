@@ -1,4 +1,4 @@
-package Code;
+package Code.LinhTinh;
 
 import Code.Actor.Square;
 import Code.Screen.MainCharacter;

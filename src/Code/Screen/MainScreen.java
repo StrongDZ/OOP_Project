@@ -1,71 +1,69 @@
 package Code.Screen;
 
-
-import Code.Actor.Circle;
-import Code.Actor.Objectss;
-import Code.Actor.Square;
+import Code.Actor.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainScreen extends JFrame{
-    GridBagConstraints gbc = new GridBagConstraints();;
+public class MainScreen extends JFrame {
+    GridBagConstraints gbc = new GridBagConstraints();
     GridBagLayout gb = new GridBagLayout();
+    MainCharacter mainCharacter = new MainCharacter();
     Showparameters showparameters = new Showparameters();
     Menuofparameters menuofparameters = new Menuofparameters(this);
     Characters characters = new Characters(this);
     AppliedForce appliedForce = new AppliedForce(this);
     FrictionCoeficient frictionCoeficient = new FrictionCoeficient(this);
+    ControlPanel controlPanel = new ControlPanel(this);
 
-    MainCharacter mainCharacter = new MainCharacter();
-    MovingImagePanel ground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
-    MovingImagePanel ground1 = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg");
+    BackgroundPanel ground = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\LinhTinh\\Background.jpg").getImage(),0,-250);
+    MovingImagePanel movingground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\LinhTinh\\Background.jpg");
+    Timer timer;
 
-    public MainScreen(String title){
+    public MainScreen(String title) {
         setting(title);
-        BackgroundPanel panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg").getImage(),0,-150);
+        BackgroundPanel panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\LinhTinh\\Background1.jpg").getImage(),0,-150);
         panel.setPreferredSize(new Dimension(1920, 1080));
         panel.setLayout(gb);
-
-        //Hàng đầu
+        //Hàng 1
         gbc.insets = new Insets(10,10,30,30);
         addComponent(panel, showparameters,0,0,1,2);
 
         gbc.insets = new Insets(10,30,30,10);
         addComponent(panel, menuofparameters,0,2,1,1);
+        //Hàng 2
 
-        //Hàng cuối
+        gbc.insets = new Insets(0,0,0,0);
+        gbc.anchor = GridBagConstraints.NORTH;
+        addComponent(panel,controlPanel,2,2,1,1);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        addComponent(panel, mainCharacter, 2,0,1,3);
+        //Hàng 3
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        movingground.setPreferredSize(new Dimension(1200, 40));
+        addComponent(panel, movingground, 3,0,1,3);
         gbc.anchor = GridBagConstraints.SOUTH;
 
-        gbc.insets = new Insets(70,20,20,25);
-        addComponent(panel, appliedForce, 2, 1,1,1);
-        gbc.insets = new Insets(70,25,20,20);
-        addComponent(panel, characters,2,0,1,1);
-        gbc.insets = new Insets(70,20,20,26);
-        addComponent(panel, frictionCoeficient, 2,2,1,1);
+        //Hàng 4
+        gbc.insets = new Insets(20,20,10,25);
+        addComponent(panel, appliedForce, 4, 1,1,1);
+        gbc.insets = new Insets(20,25,10,20);
+        addComponent(panel, characters,4,0,1,1);
+        gbc.insets = new Insets(20,20,10,26);
+        addComponent(panel, frictionCoeficient, 4,2,1,1);
 
         gbc.insets = new Insets(0,0,0,0);
-        gbc.fill = GridBagConstraints.BOTH;
-//        ground.setPreferredSize(new Dimension(1000, 200));
-        addComponent(panel, ground, 2,0,1,3);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        ground.setPreferredSize(new Dimension(1200, 300));
+        addComponent(panel, ground, 4,0,1,3);
 
-        gbc.insets = new Insets(0,0,0,0);
-        gbc.fill = GridBagConstraints.BOTH;
-//        ground.setPreferredSize(new Dimension(1000, 200));
-        addComponent(panel, ground1, 2,0,1,3);
-
-        //Hàng giữa
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.VERTICAL;
-//        gbc.insets = new Insets(15,0,0,0);
-        addComponent(panel, mainCharacter, 1,0,1,3);
 
         panel.revalidate();
         panel.repaint();
         add(panel);
-
     }
 
     public void setting(String title){
@@ -75,8 +73,8 @@ public class MainScreen extends JFrame{
         setPreferredSize(new Dimension(1920, 1080));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    public void addComponent(JPanel zui, Component c, int row, int col, int nrow, int ncol)
-    {
+
+    public void addComponent(JPanel zui, Component c, int row, int col, int nrow, int ncol) {
         gbc.gridx=col;
         gbc.gridy=row;
 
@@ -87,6 +85,7 @@ public class MainScreen extends JFrame{
 
         zui.add(c);
     }
+
     public static void main(String[] args){
         MainScreen screen = new MainScreen("Forces");
         screen.revalidate();
@@ -95,41 +94,48 @@ public class MainScreen extends JFrame{
         screen.setExtendedState(JFrame.MAXIMIZED_BOTH);
         screen.Synchronization();
         screen.setVisible(true);
-
     }
 
     public void Synchronization(){
-        Timer timer = new Timer();
-        TimerTask repeatedTask = new TimerTask() {
-            public void run() {
-//                System.out.println("Task executed");
-                if(mainCharacter.mainCharacter == null)return;
+        timer = new Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(mainCharacter.mainCharacter == null) return;
+
                 appliedForce.SyncAppliedForce();
                 frictionCoeficient.SyncFriction();
                 Objectss mainChar = mainCharacter.mainCharacter;
-                if(mainChar instanceof Square){
-                    mainChar.calculateFriction(mainChar.getAppliedForce(),mainChar.getStaticfric(),mainChar.getKineticfric());
-                    mainChar.updateObject(mainChar.calculateAcceleration());
 
-//                    System.out.println("hah" + mainChar.getAcceleration() +" "+mainChar.getFriction());
+                if(mainChar instanceof Square || mainChar instanceof Circle) {
+                    mainChar.calculateFriction(mainChar.getAppliedForce(), mainChar.getStaticfric(), mainChar.getKineticfric());
+                    if (mainChar instanceof Square)
+                        mainChar.updateObject(mainChar.calculateAcceleration());
+                    else{
+                        ((Circle) mainChar).updateObject(mainChar.calculateAcceleration(),
+                                ((Circle) mainChar).calculateGamma(mainChar.getFriction(), mainChar.getMass(), mainChar.getSide()));
+                        ((Circle)mainChar).rotateImage(mainChar.getPosition()/5);
+                    }
                     showparameters.Update(mainChar);
+                    movingground.adjust((int)mainChar.getSpeed());
                 }
-                if(mainChar instanceof Circle){
-                    mainChar.calculateFriction(mainChar.getAppliedForce(),mainChar.getStaticfric(),mainChar.getKineticfric());
-//                    System.out.println("hah" + mainChar.getAppliedForce() +" "+mainChar.getFriction()+ " "+mainChar.getSpeed());
-                    showparameters.Update(mainChar);
-                    ((Circle)mainChar).updateObject(mainChar.calculateAcceleration(),
-                            ((Circle)mainChar).calculateGamma(mainChar.getFriction(),mainChar.getMass(),mainChar.getSide()));
-                }
+                mainCharacter.updateForce();
             }
-        };
+        });
+        timer.start();
+    }
 
-        long delay  = 0;  // 0 giây
-        long period = 10;  // 0.01 giây
+    public void stopTimer() {
+        if (timer != null && timer.isRunning()) {
+            timer.stop();
+        }
+    }
 
-        timer.scheduleAtFixedRate(repeatedTask, delay, period);
+    public void startTimer() {
+        if (timer != null && !timer.isRunning()) {
+            timer.start();
+        }
     }
 }
+
 class BackgroundPanel extends JPanel {
     private Image backgroundImage;
     int x,y;
