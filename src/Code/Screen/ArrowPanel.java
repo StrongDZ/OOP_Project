@@ -6,15 +6,17 @@ import java.awt.*;
 public class ArrowPanel extends JPanel {
     Arrow AFar, FRar, sum_arrow;
 
-    public ArrowPanel(int AFlength, int FRlength) {
+    public ArrowPanel(float AFlength, float FRlength) {
         JLayeredPane layer = new JLayeredPane();
         layer.setPreferredSize(new Dimension(400, 150));
         setOpaque(false);
+//        if(AFlength>0|| FRlength<0) {
+            AFar = new Arrow(AFlength, Color.RED);
+            FRar = new Arrow(FRlength, Color.BLUE);
+//        }
 
-        AFar = new Arrow(AFlength, Color.RED);
-        FRar = new Arrow(FRlength, Color.BLUE);
 
-        int sum_force = AFlength + FRlength;
+        float sum_force = AFlength + FRlength;
         sum_arrow = new Arrow(sum_force, Color.GREEN);
 
         if (AFlength != 0) {

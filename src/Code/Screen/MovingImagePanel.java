@@ -16,18 +16,37 @@ public class MovingImagePanel extends JPanel implements ActionListener {
     public MovingImagePanel(String s) {
         // Tải ảnh từ file
         ImageIcon icon = new ImageIcon(s);
-        image = icon.getImage();
+        Image scaledImg = icon.getImage();
+        // Resize the image if needed
+        scaledImg = scaledImg.getScaledInstance(1920, 100, Image.SCALE_SMOOTH);
+        ImageIcon haha = new ImageIcon(scaledImg);
+        image=haha.getImage();
         imageWidth = image.getWidth(this);
         imageHeight = image.getHeight(this);
 
         x1 = -imageWidth;
         x2 = x1 + imageWidth;
-        y = 0;
+        y = -20;
 
-//        timer = new Timer(1, this);
-//        timer.start();
+        timer = new Timer(10, this);
+        timer.stop();
+        this.setPreferredSize(new Dimension(1920, 1080));
+    }
+    public void setTimerInterval(int interval){
+        System.out.println(interval);
+        timer.setDelay(interval);
+        startTimer();;
+    }
+    public void stopTimer() {
+        if (timer != null && timer.isRunning()) {
+            timer.stop();
+        }
+    }
 
-//        this.setPreferredSize(new Dimension(1920, 1080));
+    public void startTimer() {
+        if (timer != null && !timer.isRunning()) {
+            timer.start();
+        }
     }
 
     @Override
@@ -56,16 +75,16 @@ public class MovingImagePanel extends JPanel implements ActionListener {
 
     public static void main(String[] args) {
         // Tạo JFrame để chứa JPanel
-//        JFrame frame = new JFrame("Moving Image Panel");
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLayout(new BorderLayout());
-//
-////        MovingImagePanel movingImagePanel = new MovingImagePanel();
-//
-//        frame.add(movingImagePanel, BorderLayout.CENTER);
-//
-//        frame.pack();
-//        frame.setLocationRelativeTo(null);
-//        frame.setVisible(true);
+        JFrame frame = new JFrame("Moving Image Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        MovingImagePanel movingImagePanel = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
+
+        frame.add(movingImagePanel, BorderLayout.CENTER);
+
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

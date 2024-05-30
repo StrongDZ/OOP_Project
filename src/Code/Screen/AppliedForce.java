@@ -74,10 +74,10 @@ public class AppliedForce extends JPanel {
         slider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                if (!slider.getValueIsAdjusting()){
+//                if (!slider.getValueIsAdjusting()){
                     textField.setText(String.valueOf(slider.getValue()));
                     change=true;
-                }
+//                }
             }
         });
 
@@ -104,6 +104,7 @@ public class AppliedForce extends JPanel {
         if(!change)return;
         change=false;
         Objectss mainCharacter = screen.mainCharacter.mainCharacter;
-        mainCharacter.setAppliedForce(Integer.parseInt(textField.getText()));
+        System.out.println("haha" + textField.getText());
+        if(textField.getText()!=null) mainCharacter.setAppliedForce(Integer.parseInt(textField.getText()));
     }
 }

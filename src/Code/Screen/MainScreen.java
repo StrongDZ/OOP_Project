@@ -20,9 +20,9 @@ public class MainScreen extends JFrame{
     FrictionCoeficient frictionCoeficient = new FrictionCoeficient(this);
 
     MainCharacter mainCharacter = new MainCharacter();
-    MovingImagePanel ground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
+    BackgroundPanel ground = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg").getImage(),0,-250);
 //    MovingImagePanel ground1 = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg");
-
+    MovingImagePanel movingground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
     public MainScreen(String title){
         setting(title);
         BackgroundPanel panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg").getImage(),0,-150);
@@ -37,19 +37,24 @@ public class MainScreen extends JFrame{
         addComponent(panel, menuofparameters,0,2,1,1);
 
         //Hàng cuối
+        gbc.insets = new Insets(0,0,0,0);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        movingground.setPreferredSize(new Dimension(1200, 40));
+//        new test(ground)
+        addComponent(panel, movingground, 2,0,1,3);
         gbc.anchor = GridBagConstraints.SOUTH;
 
-        gbc.insets = new Insets(70,20,20,25);
-        addComponent(panel, appliedForce, 2, 1,1,1);
-        gbc.insets = new Insets(70,25,20,20);
-        addComponent(panel, characters,2,0,1,1);
-        gbc.insets = new Insets(70,20,20,26);
-        addComponent(panel, frictionCoeficient, 2,2,1,1);
+        gbc.insets = new Insets(20,20,10,25);
+        addComponent(panel, appliedForce, 3, 1,1,1);
+        gbc.insets = new Insets(20,25,10,20);
+        addComponent(panel, characters,3,0,1,1);
+        gbc.insets = new Insets(20,20,10,26);
+        addComponent(panel, frictionCoeficient, 3,2,1,1);
 
         gbc.insets = new Insets(0,0,0,0);
-        gbc.fill = GridBagConstraints.BOTH;
-//        ground.setPreferredSize(new Dimension(1000, 200));
-        addComponent(panel, ground, 2,0,1,3);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        ground.setPreferredSize(new Dimension(1200, 300));
+        addComponent(panel, ground, 3,0,1,3);
 
         //Hàng giữa
         gbc.anchor = GridBagConstraints.CENTER;
@@ -99,28 +104,28 @@ public class MainScreen extends JFrame{
             public void run() {
 //                System.out.println("Task executed");
                 if(mainCharacter.mainCharacter == null)return;
+//                System.out.println("agjbajgb");
                 appliedForce.SyncAppliedForce();
                 frictionCoeficient.SyncFriction();
                 Objectss mainChar = mainCharacter.mainCharacter;
-                if(mainChar instanceof Square){
-                    mainChar.calculateFriction(mainChar.getAppliedForce(),mainChar.getStaticfric(),mainChar.getKineticfric());
-                    mainChar.updateObject(mainChar.calculateAcceleration());
-
-//                    System.out.println("hah" + mainChar.getAcceleration() +" "+mainChar.getFriction());
+                if(mainChar instanceof Square||mainChar instanceof Circle) {
+                    mainChar.calculateFriction(mainChar.getAppliedForce(), mainChar.getStaticfric(), mainChar.getKineticfric());
+                    if (mainChar instanceof Square) mainChar.updateObject(mainChar.calculateAcceleration());
+                    else{
+                        ((Circle) mainChar).updateObject(mainChar.calculateAcceleration(),
+                                ((Circle) mainChar).calculateGamma(mainChar.getFriction(), mainChar.getMass(), mainChar.getSide()));
+                    }
                     showparameters.Update(mainChar);
+                    int speed = Math.abs((int)mainChar.getSpeed());
+                    if(speed == 0 ) movingground.stopTimer();
+                    else movingground.setTimerInterval((int)(300/speed));
                 }
-                if(mainChar instanceof Circle){
-                    mainChar.calculateFriction(mainChar.getAppliedForce(),mainChar.getStaticfric(),mainChar.getKineticfric());
-//                    System.out.println("hah" + mainChar.getAppliedForce() +" "+mainChar.getFriction()+ " "+mainChar.getSpeed());
-                    showparameters.Update(mainChar);
-                    ((Circle)mainChar).updateObject(mainChar.calculateAcceleration(),
-                            ((Circle)mainChar).calculateGamma(mainChar.getFriction(),mainChar.getMass(),mainChar.getSide()));
-                }
+                mainCharacter.updateForce();
             }
         };
 
         long delay  = 0;  // 0 giây
-        long period = 10;  // 0.01 giây
+        long period = 10;  // 0.05 giây
 
         timer.scheduleAtFixedRate(repeatedTask, delay, period);
     }
