@@ -1,20 +1,18 @@
 package Code.Screen;
 
 import Code.Actor.Objectss;
-import Code.test;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class MainCharacter extends JLayeredPane {
     public Objectss mainCharacter;
-    ArrowPanel Force = new ArrowPanel(0,0);
+    public ArrowPanel Force = new ArrowPanel(0,0);
     int length;
+    boolean vif=false, vis=false;
     public MainCharacter() {
         setPreferredSize(new Dimension(500, 250));
-//        new test(Force);
-        Force.setBounds(550,0,400,150);
-        add(Force,Integer.valueOf(2));
+        add(Force);
         setVisible(true);
         setOpaque(false);
     }
@@ -38,6 +36,24 @@ public class MainCharacter extends JLayeredPane {
         remove(Force);
         Force = new ArrowPanel(mainCharacter.getAppliedForce(),mainCharacter.getFriction());
         Force.setBounds(550,250-length,400,150);
+        StatusOfForce(vif);
+        StatusOfSum(vis);
+        add(Force,Integer.valueOf(2));
+        revalidate();
+        repaint();
+    }
+
+    public void StatusOfForce(boolean status){
+        Force.AFar.setVisible(status);
+        Force.FRar.setVisible(status);
+    }
+
+    public void StatusOfSum(boolean status){
+        Force.sum_arrow.setVisible(status);
+    }
+    public void reset(){
+        remove(Force);
+        Force = new ArrowPanel(0,0);
         add(Force,Integer.valueOf(2));
         revalidate();
         repaint();

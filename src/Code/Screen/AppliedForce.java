@@ -1,7 +1,7 @@
 package Code.Screen;
 
 import Code.Actor.Objectss;
-import Code.Actor.Square;
+import Code.LinhTinh.ExceptionCase;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -100,11 +100,17 @@ public class AppliedForce extends JPanel {
             }
         });
     }
-    public void SyncAppliedForce(){
-        if(!change)return;
-        change=false;
+    public void SyncAppliedForce() {
+        if (!change) return;
+        change = false;
         Objectss mainCharacter = screen.mainCharacter.mainCharacter;
-        System.out.println("haha" + textField.getText());
-        if(textField.getText()!=null) mainCharacter.setAppliedForce(Integer.parseInt(textField.getText()));
+        String text = textField.getText();
+        if (text.matches("-?\\d+")) {
+            int appliedForce = Integer.parseInt(text);
+            mainCharacter.setAppliedForce(appliedForce);
+        }
+    }
+    public void reset(){
+        slider.setValue(0);
     }
 }

@@ -1,6 +1,5 @@
 package Code.Screen;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +9,7 @@ public class MovingImagePanel extends JPanel implements ActionListener {
     private Image image;
     private int x1, x2, y;
     private int imageWidth, imageHeight;
-    private int step = 5; // Bước di chuyển của ảnh
+    public int step = 5; // Bước di chuyển của ảnh
     private Timer timer;
 
     public MovingImagePanel(String s) {
@@ -20,7 +19,7 @@ public class MovingImagePanel extends JPanel implements ActionListener {
         // Resize the image if needed
         scaledImg = scaledImg.getScaledInstance(1920, 100, Image.SCALE_SMOOTH);
         ImageIcon haha = new ImageIcon(scaledImg);
-        image=haha.getImage();
+        image = haha.getImage();
         imageWidth = image.getWidth(this);
         imageHeight = image.getHeight(this);
 
@@ -32,11 +31,23 @@ public class MovingImagePanel extends JPanel implements ActionListener {
         timer.stop();
         this.setPreferredSize(new Dimension(1920, 1080));
     }
-    public void setTimerInterval(int interval){
-        System.out.println(interval);
-        timer.setDelay(interval);
-        startTimer();;
+
+    public void adjust(int velocity){
+        int speed = Math.abs(velocity);
+        if(speed == 0 ) stopTimer();
+        else{
+            setTimerInterval(200/speed);
+            if(velocity < 0){
+                step = Math.max(1,speed/5);
+            }
+            else step = -Math.max(1,speed/5);
+        }
     }
+    public void setTimerInterval(int interval) {
+        timer.setDelay(interval);
+        startTimer();
+    }
+
     public void stopTimer() {
         if (timer != null && timer.isRunning()) {
             timer.stop();
@@ -62,12 +73,22 @@ public class MovingImagePanel extends JPanel implements ActionListener {
         x1 += step;
         x2 += step;
 
-        if (x1 >= getWidth()) {
-            x1 = x2 - imageWidth;
-        }
+        if (step > 0) { // Di chuyển sang phải
+            if (x1 >= getWidth()) {
+                x1 = x2 - imageWidth;
+            }
 
-        if (x2 >= getWidth()) {
-            x2 = x1 - imageWidth;
+            if (x2 >= getWidth()) {
+                x2 = x1 - imageWidth;
+            }
+        } else { // Di chuyển sang trái
+            if (x1 <= -imageWidth) {
+                x1 = x2 + imageWidth;
+            }
+
+            if (x2 <= -imageWidth) {
+                x2 = x1 + imageWidth;
+            }
         }
 
         repaint(); // Vẽ lại JPanel
@@ -82,7 +103,6 @@ public class MovingImagePanel extends JPanel implements ActionListener {
         MovingImagePanel movingImagePanel = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
 
         frame.add(movingImagePanel, BorderLayout.CENTER);
-
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

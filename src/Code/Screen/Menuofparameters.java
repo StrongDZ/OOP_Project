@@ -1,6 +1,6 @@
 package Code.Screen;
 
-import Code.test;
+import Code.Actor.Objectss;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -53,6 +53,8 @@ public class Menuofparameters extends JPanel {
         bmass = setToggle("Mass");
         bsum = setToggle("Sum of force");
 
+        MainCharacter main = screen.mainCharacter;
+
         bposition.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,6 +82,40 @@ public class Menuofparameters extends JPanel {
                     screen.showparameters.stateAcceleration(false);
                 }
                 else screen.showparameters.stateAcceleration(true);
+            }
+        });
+
+        bmass.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Objectss mainChar = main.mainCharacter;
+                if (bmass.isSelected()) {
+                    if(mainChar!=null)bmass.setText(mainChar.getMass()+" kg");
+                    else bmass.setText("Object null");
+                }
+                else bmass.setText("Mass");
+            }
+        });
+
+        bforce.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                System.out.println("afafafafa");
+                if (bforce.isSelected()) main.vif=true;
+//                    System.out.println("afafafafa");
+
+                else main.vif=false;
+                main.updateForce();
+            }
+        });
+
+        bsum.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (bsum.isSelected()) main.vis=true;
+                else main.vis=false;
+                main.updateForce();
             }
         });
     }

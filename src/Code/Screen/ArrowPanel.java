@@ -26,14 +26,13 @@ public class ArrowPanel extends JPanel {
 
         if (FRlength != 0) {
             FRar.setBounds(0, 0, 400, 100);
-            layer.add(FRar, Integer.valueOf(1));
+            layer.add(FRar, Integer.valueOf(3));
         }
 
         if (sum_force != 0) {
             sum_arrow.setBounds(0, 50, 400, 100);
-            layer.add(sum_arrow, Integer.valueOf(3));
+            layer.add(sum_arrow, Integer.valueOf(1));
         }
-
         layer.setVisible(true);
         add(layer);
         repaint();
