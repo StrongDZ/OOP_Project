@@ -21,7 +21,7 @@ public class MainScreen extends JFrame{
 
     MainCharacter mainCharacter = new MainCharacter();
     MovingImagePanel ground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
-    MovingImagePanel ground1 = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg");
+//    MovingImagePanel ground1 = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background1.jpg");
 
     public MainScreen(String title){
         setting(title);
@@ -51,14 +51,9 @@ public class MainScreen extends JFrame{
 //        ground.setPreferredSize(new Dimension(1000, 200));
         addComponent(panel, ground, 2,0,1,3);
 
-        gbc.insets = new Insets(0,0,0,0);
-        gbc.fill = GridBagConstraints.BOTH;
-//        ground.setPreferredSize(new Dimension(1000, 200));
-        addComponent(panel, ground1, 2,0,1,3);
-
         //Hàng giữa
         gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.VERTICAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 //        gbc.insets = new Insets(15,0,0,0);
         addComponent(panel, mainCharacter, 1,0,1,3);
 

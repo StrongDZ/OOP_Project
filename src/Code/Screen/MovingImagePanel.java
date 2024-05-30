@@ -24,8 +24,8 @@ public class MovingImagePanel extends JPanel implements ActionListener {
         x2 = x1 + imageWidth;
         y = 0;
 
-        timer = new Timer(1, this);
-        timer.start();
+//        timer = new Timer(1, this);
+//        timer.start();
 
 //        this.setPreferredSize(new Dimension(1920, 1080));
     }

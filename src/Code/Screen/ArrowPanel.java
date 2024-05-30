@@ -4,82 +4,123 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ArrowPanel extends JPanel {
-    private int positiveLength;
-    private int negativeLength;
+    Arrow AFar, FRar, sum_arrow;
 
-    public ArrowPanel(int positiveLength, int negativeLength) {
-        // Kiểm tra các tham số đầu vào để đảm bảo tính hợp lệ
-        if (positiveLength <= 0 || negativeLength >= 0) {
-            throw new IllegalArgumentException("positiveLength phải lớn hơn 0 và negativeLength phải nhỏ hơn 0");
+    public ArrowPanel(int AFlength, int FRlength) {
+        JLayeredPane layer = new JLayeredPane();
+        layer.setPreferredSize(new Dimension(400, 150));
+        setOpaque(false);
+
+        AFar = new Arrow(AFlength, Color.RED);
+        FRar = new Arrow(FRlength, Color.BLUE);
+
+        int sum_force = AFlength + FRlength;
+        sum_arrow = new Arrow(sum_force, Color.GREEN);
+
+        if (AFlength != 0) {
+            AFar.setBounds(0, 0, 400, 100);
+            layer.add(AFar, Integer.valueOf(2));
         }
 
-        this.positiveLength = positiveLength;
-        this.negativeLength = negativeLength;
-        this.setPreferredSize(new Dimension(400, 400)); // Cài đặt kích thước ưu tiên cho JPanel
+        if (FRlength != 0) {
+            FRar.setBounds(0, 0, 400, 100);
+            layer.add(FRar, Integer.valueOf(1));
+        }
+
+        if (sum_force != 0) {
+            sum_arrow.setBounds(0, 50, 400, 100);
+            layer.add(sum_arrow, Integer.valueOf(3));
+        }
+
+        layer.setVisible(true);
+        add(layer);
+        repaint();
+        revalidate();
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Arrow Panel");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.add(new ArrowPanel(20, -40));
+            frame.setSize(400, 200);
+            frame.setVisible(true);
+            frame.repaint();
+            frame.revalidate();
+        });
+    }
+}
+
+class Arrow extends JPanel {
+    protected double forceLength;
+    protected Color color;
+
+    public Arrow(double forceLength, Color color) {
+        setPreferredSize(new Dimension(400, 100));
+        setOpaque(false);
+        this.forceLength = forceLength;
+        this.color = color;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        // Skip drawing if force length is zero
+        if (forceLength == 0) {
+            return;
+        }
+
         Graphics2D g2d = (Graphics2D) g;
 
-        // Lấy kích thước của JPanel
-        int width = getWidth();
-        int height = getHeight();
+        // Enable anti-aliasing for better rendering
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // Tính toán tọa độ của tâm JPanel
-        int centerX = width / 2;
-        int centerY = height / 2;
+        // Determine starting position
+        int panelWidth = getWidth();
+        int panelHeight = getHeight();
+        int x1 = panelWidth / 2;
+        int y1 = panelHeight / 2;
 
-        // Vẽ mũi tên dương với màu xanh
-        drawArrow(g2d, centerX, centerY, centerX + positiveLength, centerY, 30, Color.BLUE);
+        // Adjust strength for drawing
+        double strength = forceLength / 2;
 
-        // Vẽ mũi tên âm với màu đỏ
-        drawArrow(g2d, centerX, centerY, centerX + negativeLength, centerY, 30, Color.RED);
-    }
+        // Define arrow dimensions and position
+        int arrowLength = (int) (Math.abs(strength / 2));
+        int arrowHeight = 40;
+        int arrowHeadLength = 20;
+        int arrowHeadHeight = 20;
 
-    private void drawArrow(Graphics2D g2d, int x1, int y1, int x2, int y2, int arrowWidth, Color color) {
-        // Đặt màu sắc cho mũi tên
+        // Determine the direction and adjust x2 based on the sign of strength
+        boolean isPositive = strength > 0;
+        int x2 = isPositive ? x1 + arrowLength : x1 - arrowLength;
+
+        // Set arrow color
         g2d.setColor(color);
 
-        // Vẽ thân mũi tên có độ rộng 30
-        g2d.setStroke(new BasicStroke(arrowWidth, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER));
-        g2d.drawLine(x1, y1, x2, y2);
+        // Draw arrow body
+        if (isPositive) {
+            g2d.fillRect(x1, y1, arrowLength, arrowHeight);
+        } else {
+            g2d.fillRect(x2, y1, arrowLength, arrowHeight);
+        }
 
-        // Tính toán góc của mũi tên
-        double angle = Math.atan2(y2 - y1, x2 - x1);
+        // Draw arrow head
+        int[] xPoints = isPositive ? new int[]{x1 + arrowLength, x1 + arrowLength + arrowHeadLength, x1 + arrowLength} :
+                new int[]{x2, x2 - arrowHeadLength, x2};
+        int[] yPoints = new int[]{y1 - 5, y1 + arrowHeadHeight, y1 + arrowHeight + 5};
+        g2d.fillPolygon(xPoints, yPoints, 3);
 
-        // Độ dài của các nhánh mũi tên
-        int arrowHeadLength = 20;
-
-        // Tạo các điểm của polygon cho đầu mũi tên
-        int[] xPoints = {
-                x2,
-                (int) (x2 - arrowHeadLength * Math.cos(angle - Math.PI / 6)),
-                (int) (x2 - arrowHeadLength * Math.cos(angle + Math.PI / 6))
-        };
-        int[] yPoints = {
-                y2,
-                (int) (y2 - arrowHeadLength * Math.sin(angle - Math.PI / 6)),
-                (int) (y2 - arrowHeadLength * Math.sin(angle + Math.PI / 6))
-        };
-
-        // Tạo polygon cho đầu mũi tên
-        Polygon arrowHead = new Polygon(xPoints, yPoints, 3);
-        g2d.fill(arrowHead);
-    }
-
-    public static void main(String[] args) {
-        // Tạo JFrame để hiển thị ArrowPanel
-        JFrame frame = new JFrame("Arrow Panel Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Tạo ArrowPanel với độ dài mũi tên dương và âm
-        ArrowPanel arrowPanel = new ArrowPanel(100, -50);
-
-        frame.add(arrowPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null); // Hiển thị JFrame ở giữa màn hình
-        frame.setVisible(true);
+        // Draw the force strength label
+        g2d.setColor(Color.BLACK);
+        g2d.setFont(new Font("Arial", Font.BOLD, 14));
+        String label = Math.abs((int) (strength * 2)) + "N";
+        FontMetrics metrics = g.getFontMetrics(g2d.getFont());
+        int labelWidth = metrics.stringWidth(label);
+        int labelHeight = metrics.getHeight();
+        int labelX = isPositive ? Math.max(x1, x1 + (arrowLength - labelWidth) / 2) :
+                Math.min(x1 - labelWidth, x2 + (arrowLength - labelWidth) / 2);
+        int labelY = y1 + (arrowHeight + labelHeight) / 2 - 5;
+        g2d.drawString(label, labelX, labelY);
     }
 }
