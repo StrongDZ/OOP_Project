@@ -3,7 +3,7 @@ package Code.Screen;
 //import javafx.*;
 
 
-import Code.Actor.Objectss;
+import Code.Object.Objectss;
 
 import javax.swing.*;
 import java.awt.*;

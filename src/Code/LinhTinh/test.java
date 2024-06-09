@@ -1,9 +1,5 @@
 package Code.LinhTinh;
 
-import Code.Actor.Square;
-import Code.Screen.MainCharacter;
-import Code.Screen.Showparameters;
-
 import javax.swing.*;
 
 public class test {

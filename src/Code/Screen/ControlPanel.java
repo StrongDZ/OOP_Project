@@ -1,7 +1,7 @@
 package Code.Screen;
 
-import Code.Actor.Circle;
-import Code.Actor.Objectss;
+import Code.Object.Circle;
+import Code.Object.Objectss;
 import Code.LinhTinh.test;
 
 import javax.swing.*;
@@ -13,6 +13,7 @@ public class ControlPanel extends JPanel {
     MainScreen screen;
     public ControlPanel(MainScreen screen) {
         this.screen=screen;
+//        setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setPreferredSize(new Dimension(400,40));
 

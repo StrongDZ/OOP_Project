@@ -1,4 +1,4 @@
-package Code.Actor;
+package Code.Object;
 
 public class Vector {
 //    protected int orientation = 0;

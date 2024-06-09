@@ -1,5 +1,5 @@
 package Code.Screen;
-import Code.Actor.Objectss;
+import Code.Object.Objectss;
 import Code.LinhTinh.ExceptionCase;
 
 import javax.swing.*;
