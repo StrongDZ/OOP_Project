@@ -13,6 +13,13 @@ public class MovingImagePanel extends JPanel implements ActionListener {
     private Timer timer;
 
     public MovingImagePanel(String s) {
+        loadImage(s);
+        timer = new Timer(10, this);
+        timer.stop();
+        this.setPreferredSize(new Dimension(1920, 1080));
+    }
+
+    private void loadImage(String s) {
         // Tải ảnh từ file
         ImageIcon icon = new ImageIcon(s);
         Image scaledImg = icon.getImage();
@@ -25,24 +32,25 @@ public class MovingImagePanel extends JPanel implements ActionListener {
 
         x1 = -imageWidth;
         x2 = x1 + imageWidth;
-        y = -20;
-
-        timer = new Timer(10, this);
-        timer.stop();
-        this.setPreferredSize(new Dimension(1920, 1080));
+        y = -10;
     }
 
-    public void adjust(int velocity){
+    public void setImage(String imagePath) {
+        loadImage(imagePath);
+        repaint();
+    }
+
+    public void adjust(int velocity) {
         int speed = Math.abs(velocity);
-        if(speed == 0 ) stopTimer();
-        else{
-            setTimerInterval(200/speed);
-            if(velocity < 0){
-                step = Math.max(1,speed/5);
-            }
-            else step = -Math.max(1,speed/5);
+        if (speed == 0) stopTimer();
+        else {
+            setTimerInterval(200 / speed);
+            if (velocity < 0) {
+                step = Math.max(1, speed / 5);
+            } else step = -Math.max(1, speed / 5);
         }
     }
+
     public void setTimerInterval(int interval) {
         timer.setDelay(interval);
         startTimer();
@@ -101,6 +109,9 @@ public class MovingImagePanel extends JPanel implements ActionListener {
         frame.setLayout(new BorderLayout());
 
         MovingImagePanel movingImagePanel = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
+
+        // Example of changing the image
+        movingImagePanel.setImage("D:\\Java\\OOP_Project\\src\\Code\\Screen\\NewBackground.jpg");
 
         frame.add(movingImagePanel, BorderLayout.CENTER);
         frame.pack();

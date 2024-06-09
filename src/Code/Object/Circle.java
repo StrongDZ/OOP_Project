@@ -12,7 +12,7 @@ public class Circle extends Objectss {
 
     public Circle(int Length) {
         this.length = Length;
-        ImageIcon img = new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\LinhTinh\\BongDa.png");
+        ImageIcon img = new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Utils\\BongDa.png");
         Image scaledImg = img.getImage();
         scaledImg = scaledImg.getScaledInstance(Length, Length, Image.SCALE_SMOOTH);
 

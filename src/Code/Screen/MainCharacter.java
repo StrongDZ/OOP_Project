@@ -34,7 +34,9 @@ public class MainCharacter extends JLayeredPane {
 
     public void updateForce(){
         remove(Force);
-        Force = new ArrowPanel(mainCharacter.getAppliedForce(),mainCharacter.getFriction());
+        float friction = mainCharacter.getFriction();
+        float appliedForce = mainCharacter.getAppliedForce();
+        Force = new ArrowPanel(appliedForce,friction);
         Force.setBounds(550,250-length,400,150);
         StatusOfForce(vif);
         StatusOfSum(vis);

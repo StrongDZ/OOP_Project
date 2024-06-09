@@ -1,6 +1,6 @@
 package Code.Screen;
 
-import Code.Actor.*;
+import Code.Object.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +17,15 @@ public class MainScreen extends JFrame {
     AppliedForce appliedForce = new AppliedForce(this);
     FrictionCoeficient frictionCoeficient = new FrictionCoeficient(this);
     ControlPanel controlPanel = new ControlPanel(this);
+    SpecialMode specialMode = new SpecialMode();
 
-    BackgroundPanel ground = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\LinhTinh\\Background.jpg").getImage(),0,-250);
-    MovingImagePanel movingground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\LinhTinh\\Background.jpg");
+    BackgroundPanel ground = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Utils\\StoneBackground.png").getImage(),0,-250);
+    MovingImagePanel movingground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Utils\\ground2.png");
     Timer timer;
 
     public MainScreen(String title) {
         setting(title);
-        BackgroundPanel panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\LinhTinh\\Background1.jpg").getImage(),0,-150);
+        BackgroundPanel panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Utils\\Background1.jpg").getImage(),0,-150);
         panel.setPreferredSize(new Dimension(1920, 1080));
         panel.setLayout(gb);
         //Hàng 1
@@ -34,14 +35,19 @@ public class MainScreen extends JFrame {
         gbc.insets = new Insets(10,30,30,10);
         addComponent(panel, menuofparameters,0,2,1,1);
         //Hàng 2
-
-        gbc.insets = new Insets(0,0,0,0);
+        gbc.insets = new Insets(0,10,0,0);
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+//        gbc.fill = GridBagConstraints.BOTH;
+        addComponent(panel, specialMode, 2,0,1,1);
+//        gbc.insets = new Insets(0,0,0,0);
+        gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.NORTH;
         addComponent(panel,controlPanel,2,2,1,1);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         addComponent(panel, mainCharacter, 2,0,1,3);
         //Hàng 3
+        gbc.insets = new Insets(0,0,0,0);
         gbc.fill = GridBagConstraints.HORIZONTAL;
         movingground.setPreferredSize(new Dimension(1200, 40));
         addComponent(panel, movingground, 3,0,1,3);
@@ -106,16 +112,24 @@ public class MainScreen extends JFrame {
                 Objectss mainChar = mainCharacter.mainCharacter;
 
                 if(mainChar instanceof Square || mainChar instanceof Circle) {
+                    float before_fric = mainChar.getFriction();
                     mainChar.calculateFriction(mainChar.getAppliedForce(), mainChar.getStaticfric(), mainChar.getKineticfric());
                     if (mainChar instanceof Square)
                         mainChar.updateObject(mainChar.calculateAcceleration());
                     else{
                         ((Circle) mainChar).updateObject(mainChar.calculateAcceleration(),
                                 ((Circle) mainChar).calculateGamma(mainChar.getFriction(), mainChar.getMass(), mainChar.getSide()));
-                        ((Circle)mainChar).rotateImage(mainChar.getPosition()/5);
+                        if(mainChar.getFriction() !=0) ((Circle)mainChar).rotateImage(mainChar.getPosition()/5);
                     }
                     showparameters.Update(mainChar);
                     movingground.adjust((int)mainChar.getSpeed());
+                    float after_fric = mainChar.getFriction();
+                    if(before_fric !=0 && after_fric == 0){
+                        movingground.setImage("D:\\Java\\OOP_Project\\src\\Code\\Utils\\ground2.png");
+                    }
+                    if(before_fric ==0 && after_fric != 0){
+                        movingground.setImage("D:\\Java\\OOP_Project\\src\\Code\\Utils\\ground.png");
+                    }
                 }
                 mainCharacter.updateForce();
             }
