@@ -17,11 +17,11 @@ public class MainScreen extends JFrame {
     AppliedForce appliedForce = new AppliedForce(this);
     FrictionCoeficient frictionCoeficient = new FrictionCoeficient(this);
     ControlPanel controlPanel = new ControlPanel(this);
-    SpecialMode specialMode = new SpecialMode();
 
     BackgroundPanel ground = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Utils\\StoneBackground.png").getImage(),0,-250);
     MovingImagePanel movingground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Utils\\ground2.png");
     Timer timer;
+    Air air = new Air(this,6, 200);
 
     public MainScreen(String title) {
         setting(title);
@@ -29,16 +29,22 @@ public class MainScreen extends JFrame {
         panel.setPreferredSize(new Dimension(1920, 1080));
         panel.setLayout(gb);
         //Hàng 1
+         gbc.insets = new Insets(0,0,0,0);
+        gbc.fill = GridBagConstraints.BOTH;
+        addComponent(panel, air,0,0,3,3);
         gbc.insets = new Insets(10,10,30,30);
         addComponent(panel, showparameters,0,0,1,2);
 
         gbc.insets = new Insets(10,30,30,10);
         addComponent(panel, menuofparameters,0,2,1,1);
+
+
+
         //Hàng 2
-        gbc.insets = new Insets(0,10,0,0);
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-//        gbc.fill = GridBagConstraints.BOTH;
-        addComponent(panel, specialMode, 2,0,1,1);
+        gbc.insets = new Insets(0,0,0,0);
+//        gbc.anchor = GridBagConstraints.NORTHWEST;
+////        gbc.fill = GridBagConstraints.BOTH;
+//        addComponent(panel, specialMode, 2,0,1,1);
 //        gbc.insets = new Insets(0,0,0,0);
         gbc.fill = GridBagConstraints.NONE;
         gbc.anchor = GridBagConstraints.NORTH;
@@ -141,12 +147,14 @@ public class MainScreen extends JFrame {
         if (timer != null && timer.isRunning()) {
             timer.stop();
         }
+        air.stopTimers();
     }
 
     public void startTimer() {
         if (timer != null && !timer.isRunning()) {
             timer.start();
         }
+        air.startTimers();
     }
 }
 

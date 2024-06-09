@@ -6,7 +6,8 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
 public abstract class Objectss extends JButton {
-    protected float position=0, speed=0, acceleration, time=(float)0.01, friction=0,appliedForce=0, staticfric=0, kineticfric=0;
+    protected float position=0, speed=0, acceleration, time=(float)0.01, friction=0,
+            appliedForce=0, staticfric=0, kineticfric=0, airfric = 0;
     protected int mass=0, side;
     protected float gamma=0, omega=0,theta=0;
     public Image getCircularImage(Image img) {
@@ -71,6 +72,7 @@ public abstract class Objectss extends JButton {
         this.position=0;
         this.speed=0;
         this.acceleration=0;
+        this.airfric = 0;
     }
     public int getMass(){
         return mass;
@@ -136,6 +138,11 @@ public abstract class Objectss extends JButton {
     public float calculateAcceleration(){
         return this.sumofforce()/this.getMass();
     }
+
+    public void setAirfric(float airfric) {
+        this.airfric = airfric;
+    }
+
     public abstract void calculateFriction(float AppliedForce, float staticCoeffient, float kinetiCoefficient);
 
 }

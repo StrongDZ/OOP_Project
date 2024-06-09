@@ -36,6 +36,6 @@ public class Square extends Objectss{
             out = -this.normalForce()*kinetiCoefficient;
         }
         if(AppliedForce == 0 && this.getSpeed()==0)out=0;
-        setFriction(out);
+        setFriction(out+airfric);
     }
 }
