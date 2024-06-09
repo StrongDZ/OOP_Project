@@ -4,7 +4,7 @@ Mini-project for OOP 2023, HUST.
 
 Demonstration
 ---
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demonstration.png?raw=false)
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demonstration.png?raw=true)
 
 
 Member task
