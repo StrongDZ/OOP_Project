@@ -4,7 +4,7 @@ Mini-project for OOP 2023, HUST.
 
 Demonstration
 ---
-![dummy](https://img.freepik.com/free-vector/abstract-smooth-liquid-banner-presentation-backdrop_1017-42992.jpg?w=1800&t=st=1717902869~exp=1717903469~hmac=53cd799e66d9a98b5d7128802759bc1bd562cb118625ddbe53738661570fddcb)
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demonstration.png?raw=false)
 
 
 Member task
