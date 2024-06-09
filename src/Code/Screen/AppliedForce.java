@@ -1,7 +1,7 @@
 package Code.Screen;
 
 import Code.Object.Objectss;
-import Code.LinhTinh.ExceptionCase;
+import Code.Utils.ExceptionCase;
 
 import javax.swing.*;
 import javax.swing.border.Border;

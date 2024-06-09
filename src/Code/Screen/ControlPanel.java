@@ -2,7 +2,7 @@ package Code.Screen;
 
 import Code.Object.Circle;
 import Code.Object.Objectss;
-import Code.LinhTinh.test;
+import Code.Utils.test;
 
 import javax.swing.*;
 import java.awt.*;
