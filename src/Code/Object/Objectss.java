@@ -1,4 +1,4 @@
-package Code.Actor;
+package Code.Object;
 
 import javax.swing.*;
 import java.awt.*;
