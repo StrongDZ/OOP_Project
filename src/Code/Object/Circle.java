@@ -49,7 +49,7 @@ public class Circle extends Objectss {
         if (AppliedForce == 0 && this.getSpeed() == 0) {
             out = 0;
         }
-        setFriction(out);
+        setFriction(out+airfric);
     }
 
     public void updateObject(float acceleration, float newGamma) {

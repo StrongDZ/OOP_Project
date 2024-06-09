@@ -38,7 +38,6 @@ public class FrictionCoeficient extends JPanel {
     public void reset(){
         kineticFricPanel.slider.setValue(0);
         staticFricPanel.slider.setValue(1);
-
     }
 }
 
