@@ -1,4 +1,4 @@
-package Code.LinhTinh;
+package Code.Utils;
 
 import javax.swing.*;
 
