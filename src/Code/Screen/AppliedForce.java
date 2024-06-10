@@ -11,10 +11,15 @@ import java.awt.*;
 
 public class AppliedForce extends JPanel {
     private JLabel label;
+
     private JSlider slider;
     private JTextField textField;
     MainScreen screen;
     boolean change=false;
+    public void setValue(int force) {
+        int value = Math.max(-500,Math.min(force, 500));
+        slider.setValue(value);
+    }
 
     public AppliedForce(MainScreen screen) {
         this.screen= screen;

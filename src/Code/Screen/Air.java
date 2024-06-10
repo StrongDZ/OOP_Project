@@ -91,7 +91,7 @@ public class Air extends JPanel {
                 Objectss mainChar = screen.mainCharacter.mainCharacter;
                 if(mainChar != null){
                     setSpeed(mainChar.getSpeed());
-                    mainChar.setAirfric(-(float)0.3* mainChar.getSpeed());
+                    mainChar.setAirfric(-(float)0.01* mainChar.getSpeed()* mainChar.getSpeed());
                 }
 
                 repaint();

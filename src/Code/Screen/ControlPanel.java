@@ -1,26 +1,31 @@
 package Code.Screen;
 
-import Code.Object.Circle;
+import Code.HandDetection.HandDetection;
 import Code.Object.Objectss;
 import Code.Utils.test;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ControlPanel extends JPanel {
-    private JToggleButton playPauseButton,airModeButton,aiModeButton;;
+    private JToggleButton playPauseButton, airModeButton, aiModeButton;
     private JButton restartButton;
     MainScreen screen;
+    private HandDetection hand;
+    private Timer aiTimer;
+    private Thread handDetectionThread;
 
     public ControlPanel(MainScreen screen) {
         this.screen = screen;
-//        setBorder(BorderFactory.createLineBorder(Color.BLACK));
         setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         setPreferredSize(new Dimension(450, 40));
 
         playPauseButton = new JToggleButton("Pause");
         playPauseButton.addActionListener(e -> {
-            if(screen.mainCharacter.mainCharacter !=null){
+            if (screen.mainCharacter.mainCharacter != null) {
                 if (playPauseButton.isSelected()) {
                     screen.stopTimer();
                     screen.movingground.stopTimer();
@@ -51,11 +56,10 @@ public class ControlPanel extends JPanel {
         add(restartButton);
         add(Box.createRigidArea(new Dimension(30, 0)));
 
-        // Add Air Mode button
         airModeButton = new JToggleButton("Air Mode");
         airModeButton.addActionListener(e -> {
             if (airModeButton.isSelected()) {
-                airModeButton.setText("Normal Mode");
+                airModeButton.setText("Void Mode");
                 screen.air.setVisible(true);
                 screen.air.startTimers();
             } else {
@@ -68,11 +72,17 @@ public class ControlPanel extends JPanel {
         add(airModeButton);
         add(Box.createRigidArea(new Dimension(30, 0)));
 
-        // Add AI Mode button
         aiModeButton = new JToggleButton("AI Mode");
         aiModeButton.addActionListener(e -> {
-            // Implement AI Mode functionality here
-            System.out.println("AI Mode activated");
+            if (aiModeButton.isSelected()) {
+                hand = new HandDetection();
+                handDetectionThread = new Thread(hand);
+                handDetectionThread.start();
+                startAI();
+                System.out.println("AI Mode activated");
+            } else {
+                stopAI();
+            }
         });
 
         add(aiModeButton);
@@ -80,8 +90,33 @@ public class ControlPanel extends JPanel {
         setOpaque(false);
     }
 
+    public void startAI() {
+        System.out.println("AI Mode activated");
+        aiTimer = new javax.swing.Timer(10, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (hand != null) {
+                    screen.appliedForce.setValue(-2*hand.getX_out());
+                }
+            }
+        });
+        aiTimer.start();
+    }
+
+    public void stopAI() {
+        if (aiTimer != null) {
+            aiTimer.stop();
+        }
+        if (hand != null) {
+            hand.closeWindow();
+            handDetectionThread.interrupt();
+            hand = null;
+        }
+        System.out.println("AI Mode deactivated");
+    }
+
     public static void main(String[] args) {
         ControlPanel controlPanel = new ControlPanel(new MainScreen("faf"));
         new test(controlPanel);
     }
 }
+
