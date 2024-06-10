@@ -4,7 +4,15 @@ Mini-project for OOP 2023, HUST.
 
 Demonstration
 ---
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demonstration.png?raw=true)
+**Normal Mode**
+
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo1.png?raw=true)
+
+---
+
+**Air Mode**
+
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo2.png?raw=true)
 
 
 Member task
@@ -27,5 +35,6 @@ Our main class is [MainScreen.java](https://github.com/StrongDZ/OOP_Project/blob
     ├── design                  # All designs for the project (class diagram and use-case diagram)
     ├── src
     │   ├── Code                # official Java Project Code 
-    ├── presentation            # slides for presentation
+    ├── demo1            # Demonstration for Project  
+    ├── demo2            # Demonstration for Project
     └── ...
