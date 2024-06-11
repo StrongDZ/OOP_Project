@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Square extends Objectss{
     public Square(int Length){
-        ImageIcon img = new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Utils\\Steve.png");
+        ImageIcon img = new ImageIcon("src/Code/Utils/Steve.png");
         Image scaledImg = img.getImage();
 
         // Resize the image if needed

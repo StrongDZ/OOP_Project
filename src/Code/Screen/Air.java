@@ -39,7 +39,7 @@ public class Air extends JPanel {
 
     private void createImageCopies() throws IOException {
         // Load image from URL (replace with your image URL)
-        URL imageURL = new URL("file:D:\\Java\\OOP_Project\\src\\Code\\Utils\\Air.png");
+        URL imageURL = new URL("file:src\\Code\\Utils\\Air.png");
         BufferedImage image = ImageIO.read(imageURL);
 
         // Get image dimensions
@@ -91,7 +91,8 @@ public class Air extends JPanel {
                 Objectss mainChar = screen.mainCharacter.mainCharacter;
                 if(mainChar != null){
                     setSpeed(mainChar.getSpeed());
-                    mainChar.setAirfric(-(float)0.01* mainChar.getSpeed()* mainChar.getSpeed());
+                    if(mainChar.getSpeed()>0) mainChar.setAirfric(-(float)0.01* mainChar.getSpeed()* mainChar.getSpeed());
+                    else mainChar.setAirfric((float)0.01* mainChar.getSpeed()* mainChar.getSpeed());
                 }
 
                 repaint();

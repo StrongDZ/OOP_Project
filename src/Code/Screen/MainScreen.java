@@ -18,14 +18,14 @@ public class MainScreen extends JFrame {
     FrictionCoeficient frictionCoeficient = new FrictionCoeficient(this);
     ControlPanel controlPanel = new ControlPanel(this);
 
-    BackgroundPanel ground = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Utils\\StoneBackground.png").getImage(),0,-250);
-    MovingImagePanel movingground = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Utils\\ground2.png");
+    BackgroundPanel ground = new BackgroundPanel(new ImageIcon("src/Code/Utils/StoneBackground.png").getImage(),0,-250);
+    MovingImagePanel movingground = new MovingImagePanel("src/Code/Utils/ground2.png");
     Timer timer;
     Air air = new Air(this,6, 200);
 
     public MainScreen(String title) {
         setting(title);
-        BackgroundPanel panel = new BackgroundPanel(new ImageIcon("D:\\Java\\OOP_Project\\src\\Code\\Utils\\Background1.jpg").getImage(),0,-150);
+        BackgroundPanel panel = new BackgroundPanel(new ImageIcon("src/Code/Utils/Background1.jpg").getImage(),0,-150);
         panel.setPreferredSize(new Dimension(1920, 1080));
         panel.setLayout(gb);
         //Hàng 1
@@ -131,10 +131,10 @@ public class MainScreen extends JFrame {
                     movingground.adjust((int)mainChar.getSpeed());
                     float after_fric = mainChar.getFriction();
                     if(before_fric !=0 && after_fric == 0){
-                        movingground.setImage("D:\\Java\\OOP_Project\\src\\Code\\Utils\\ground2.png");
+                        movingground.setImage("src/Code/Utils/ground2.png");
                     }
                     if(before_fric ==0 && after_fric != 0){
-                        movingground.setImage("D:\\Java\\OOP_Project\\src\\Code\\Utils\\ground.png");
+                        movingground.setImage("src/Code/Utils/ground.png");
                     }
                 }
                 mainCharacter.updateForce();

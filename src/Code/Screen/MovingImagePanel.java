@@ -101,21 +101,4 @@ public class MovingImagePanel extends JPanel implements ActionListener {
 
         repaint(); // Vẽ lại JPanel
     }
-
-    public static void main(String[] args) {
-        // Tạo JFrame để chứa JPanel
-        JFrame frame = new JFrame("Moving Image Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-
-        MovingImagePanel movingImagePanel = new MovingImagePanel("D:\\Java\\OOP_Project\\src\\Code\\Screen\\Background.jpg");
-
-        // Example of changing the image
-        movingImagePanel.setImage("D:\\Java\\OOP_Project\\src\\Code\\Screen\\NewBackground.jpg");
-
-        frame.add(movingImagePanel, BorderLayout.CENTER);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 }
