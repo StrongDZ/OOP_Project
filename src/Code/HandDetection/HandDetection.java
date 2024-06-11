@@ -21,7 +21,7 @@ public class HandDetection implements Runnable {
     public volatile boolean running = true;
 
     public void run() {
-        String handCascadePath = "D:\\Java\\OOP_Project\\src\\Code\\HandDetection\\fist.xml";
+        String handCascadePath = "src/Code/HandDetection/fist.xml";
         CascadeClassifier handCascade = new CascadeClassifier(handCascadePath);
         capture = new VideoCapture(0);
         if (!capture.isOpened()) {
