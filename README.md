@@ -6,20 +6,20 @@ Demonstration
 ---
 **Normal Mode**
 
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo1.png?raw=true)
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demo%20Images/demo1.png?raw=true)
 
 ---
 
 **Air Mode**
 
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo2.png?raw=true)
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demo%20Images/demo2.png?raw=true)
 
 ---
 
 **AI Mode**
 
-Detail: Adjust the ***force*** according to the *position* of the *hand*
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo3.png?raw=true)
+Detail: Adjust the ***force*** according to the ***position*** of the ***hand***
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demo%20Images/demo3.png?raw=true)
 
 ---
 
