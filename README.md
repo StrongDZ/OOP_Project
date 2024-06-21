@@ -47,10 +47,9 @@ Our main class is [MainScreen.java](https://github.com/StrongDZ/OOP_Project/blob
 
     .
     ├── ...
-    ├── design                  # All designs for the project (class diagram and use-case diagram)
+    ├── Demo Iamges                     # Demonstration for Project
+    ├── Design Diagram                  # All designs for the project (class diagram and use-case diagram)
+    ├── Slide                           # Slides for Presentation
     ├── src
-    │   ├── Code                # Official Java Project Code 
-    ├── demo1                     
-    ├── demo2                   # Demonstration for Project
-    ├── demo3                  
+    │   ├── Code                        # Official Java Project Code                      
     └── ...
