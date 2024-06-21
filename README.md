@@ -6,20 +6,20 @@ Demonstration
 ---
 **Normal Mode**
 
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo1.png?raw=true)
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demo%20Images/demo1.png?raw=true)
 
 ---
 
 **Air Mode**
 
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo2.png?raw=true)
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demo%20Images/demo2.png?raw=true)
 
 ---
 
 **AI Mode**
 
-Detail: Adjust the ***force*** according to the *position* of the *hand*
-![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo3.png?raw=true)
+Detail: Adjust the ***force*** according to the ***position*** of the ***hand***
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/Demo%20Images/demo3.png?raw=true)
 
 ---
 
@@ -47,10 +47,9 @@ Our main class is [MainScreen.java](https://github.com/StrongDZ/OOP_Project/blob
 
     .
     ├── ...
-    ├── design                  # All designs for the project (class diagram and use-case diagram)
+    ├── Demo Iamges                     # Demonstration for Project
+    ├── Design Diagram                  # All designs for the project (class diagram and use-case diagram)
+    ├── Slide                           # Slides for Presentation
     ├── src
-    │   ├── Code                # Official Java Project Code 
-    ├── demo1                     
-    ├── demo2                   # Demonstration for Project
-    ├── demo3                  
+    │   ├── Code                        # Official Java Project Code                      
     └── ...
