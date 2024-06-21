@@ -18,7 +18,8 @@ Demonstration
 
 **AI Mode**
 
-Detail: Adjust the **force** according to the **position** of the **hand**
+Detail: Adjust the ***force*** according to the *position* of the *hand*
+![dummy](https://github.com/StrongDZ/OOP_Project/blob/main/demo3.png?raw=true)
 
 ---
 
